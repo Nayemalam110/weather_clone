@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:weather/widget/temp_by_hour.dart';
+import 'package:weather/widget/weather_by_day.dart';
+import 'package:weather/widget/weather_detalis.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -60,17 +63,23 @@ class Home extends StatelessWidget {
             (context, index) => Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Hello'),
-                  Container(
-                    height: 70,
-                    width: double.infinity,
-                    color: Colors.yellow,
+                  Row(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text('22°C'),
+                      Text('Haze'),
+                    ],
                   ),
+                  Text('sat27/16'),
+                  TempByHour(),
+                  WeatherByDay(),
+                  WeatherDetalis()
                 ],
               ),
             ), //ListTile
-            childCount: 5,
+            childCount: 1,
           ), //SliverChildBuildDelegate
         ),
 
