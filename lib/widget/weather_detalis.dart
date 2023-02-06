@@ -32,6 +32,10 @@ class WeatherDetalis extends StatelessWidget {
             DetalisMiniCard(),
           ],
         ),
+        DetalisMiniCard(),
+        DetalisMiniCard(),
+        DetalisMiniCard(),
+        DetalisMiniCard(),
       ],
     );
   }

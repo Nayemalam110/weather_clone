@@ -9,14 +9,17 @@ class DetalisMiniCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
-        child: Column(
-          children: [
-            Icon(
-              Icons.add,
-            ),
-            Text('data'),
-            Text('29')
-          ],
+        child: SizedBox(
+          height: 300,
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+              ),
+              Text('data'),
+              Text('29')
+            ],
+          ),
         ),
       ),
     );
