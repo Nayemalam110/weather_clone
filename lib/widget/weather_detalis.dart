@@ -10,8 +10,8 @@ class WeatherDetalis extends StatelessWidget {
       children: [
         Row(
           children: [
-            DetalisMiniCard(),
-            DetalisMiniCard(),
+            Expanded(child: DetalisMiniCard()),
+            Expanded(child: DetalisMiniCard()),
           ],
         ),
         Row(

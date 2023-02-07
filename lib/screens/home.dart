@@ -75,7 +75,7 @@ class Home extends StatelessWidget {
                   Text('sat27/16'),
                   TempByHour(),
                   WeatherByDay(),
-                  WeatherDetalis()
+                  SizedBox(width: double.infinity, child: WeatherDetalis())
                 ],
               ),
             ), //ListTile

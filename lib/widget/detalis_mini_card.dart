@@ -7,10 +7,9 @@ class DetalisMiniCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return SizedBox(
       child: Card(
         child: SizedBox(
-          height: 300,
           child: Column(
             children: [
               Icon(
