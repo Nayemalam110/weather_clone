@@ -1,15 +1,16 @@
 // To parse this JSON data, do
 //
-//     final authModel = authModelFromJson(jsonString);
+//     final WeatherModel = WeatherModelFromJson(jsonString);
 
 import 'dart:convert';
 
-AuthModel authModelFromJson(String str) => AuthModel.fromJson(json.decode(str));
+WeatherModel WeatherModelFromJson(String str) =>
+    WeatherModel.fromJson(json.decode(str));
 
-String authModelToJson(AuthModel data) => json.encode(data.toJson());
+String WeatherModelToJson(WeatherModel data) => json.encode(data.toJson());
 
-class AuthModel {
-  AuthModel({
+class WeatherModel {
+  WeatherModel({
     this.lat,
     this.lon,
     this.timezone,
@@ -27,7 +28,7 @@ class AuthModel {
   List<Current>? hourly;
   List<Daily>? daily;
 
-  factory AuthModel.fromJson(Map<String, dynamic> json) => AuthModel(
+  factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
         lat: json["lat"]?.toDouble(),
         lon: json["lon"]?.toDouble(),
         timezone: json["timezone"],

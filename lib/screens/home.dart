@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:weather/service/service.dart';
 import 'package:weather/widget/temp_by_hour.dart';
 import 'package:weather/widget/weather_by_day.dart';
 import 'package:weather/widget/weather_detalis.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  WeatherController weatherController =
+      Get.put(WeatherController(), permanent: true);
+  @override
+  void initState() {
+    weatherController.featchWeatherData();
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +50,7 @@ class Home extends StatelessWidget {
                 ],
               ), //Text
               background: Image.network(
-                "https://i.ibb.co/QpWGK5j/Geeksfor-Geeks.png",
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg",
                 fit: BoxFit.cover,
               ) //Images.network
               ), //FlexibleSpaceBar
