@@ -149,15 +149,15 @@ class Weather {
   });
 
   int? id;
-  Main? main;
-  Description? description;
-  Icon? icon;
+  String? main;
+  String? description;
+  String? icon;
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         id: json["id"],
-        main: mainValues.map[json["main"]]!,
-        description: descriptionValues.map[json["description"]]!,
-        icon: iconValues.map[json["icon"]]!,
+        main: json["main"],
+        description: json["description"],
+        icon: json["icon"],
       );
 
   Map<String, dynamic> toJson() => {

@@ -13,6 +13,8 @@ class WeatherController extends GetxController {
     if (response.statusCode == 200 || response.statusCode == 201) {
       // final user = json.decode(response.body);
       weathedata.value = WeatherModelFromJson(response.body);
+      print(weathedata.value.lat);
+
       //print(user);
     } else {
       print('Request failed with status code: ${response.statusCode}');
