@@ -4,9 +4,11 @@
 
 import 'dart:convert';
 
+// ignore: non_constant_identifier_names
 WeatherModel WeatherModelFromJson(String str) =>
     WeatherModel.fromJson(json.decode(str));
 
+// ignore: non_constant_identifier_names
 String WeatherModelToJson(WeatherModel data) => json.encode(data.toJson());
 
 class WeatherModel {
@@ -23,7 +25,7 @@ class WeatherModel {
   double? lat;
   double? lon;
   String? timezone;
-  int? timezoneOffset;
+  num? timezoneOffset;
   Current? current;
   List<Current>? hourly;
   List<Daily>? daily;
@@ -68,7 +70,7 @@ class Current {
     this.feelsLike,
     this.pressure,
     this.humidity,
-    this.dewPoint,
+    this.dewPonum,
     this.uvi,
     this.clouds,
     this.visibility,
@@ -79,22 +81,22 @@ class Current {
     this.pop,
   });
 
-  int? dt;
-  int? sunrise;
-  int? sunset;
+  num? dt;
+  num? sunrise;
+  num? sunset;
   double? temp;
   double? feelsLike;
-  int? pressure;
-  int? humidity;
-  double? dewPoint;
+  num? pressure;
+  num? humidity;
+  double? dewPonum;
   double? uvi;
-  int? clouds;
-  int? visibility;
+  num? clouds;
+  num? visibility;
   double? windSpeed;
-  int? windDeg;
+  num? windDeg;
   List<Weather>? weather;
   double? windGust;
-  int? pop;
+  num? pop;
 
   factory Current.fromJson(Map<String, dynamic> json) => Current(
         dt: json["dt"],
@@ -104,7 +106,7 @@ class Current {
         feelsLike: json["feels_like"]?.toDouble(),
         pressure: json["pressure"],
         humidity: json["humidity"],
-        dewPoint: json["dew_point"]?.toDouble(),
+        dewPonum: json["dew_ponum"]?.toDouble(),
         uvi: json["uvi"]?.toDouble(),
         clouds: json["clouds"],
         visibility: json["visibility"],
@@ -126,7 +128,7 @@ class Current {
         "feels_like": feelsLike,
         "pressure": pressure,
         "humidity": humidity,
-        "dew_point": dewPoint,
+        "dew_ponum": dewPonum,
         "uvi": uvi,
         "clouds": clouds,
         "visibility": visibility,
@@ -148,7 +150,7 @@ class Weather {
     this.icon,
   });
 
-  int? id;
+  num? id;
   String? main;
   String? description;
   String? icon;
@@ -202,7 +204,7 @@ class Daily {
     this.feelsLike,
     this.pressure,
     this.humidity,
-    this.dewPoint,
+    this.dewPonum,
     this.windSpeed,
     this.windDeg,
     this.windGust,
@@ -212,23 +214,23 @@ class Daily {
     this.uvi,
   });
 
-  int? dt;
-  int? sunrise;
-  int? sunset;
-  int? moonrise;
-  int? moonset;
+  num? dt;
+  num? sunrise;
+  num? sunset;
+  num? moonrise;
+  num? moonset;
   double? moonPhase;
   Temp? temp;
   FeelsLike? feelsLike;
-  int? pressure;
-  int? humidity;
-  double? dewPoint;
+  num? pressure;
+  num? humidity;
+  double? dewPonum;
   double? windSpeed;
-  int? windDeg;
+  num? windDeg;
   double? windGust;
   List<Weather>? weather;
-  int? clouds;
-  int? pop;
+  num? clouds;
+  num? pop;
   double? uvi;
 
   factory Daily.fromJson(Map<String, dynamic> json) => Daily(
@@ -244,7 +246,7 @@ class Daily {
             : FeelsLike.fromJson(json["feels_like"]),
         pressure: json["pressure"],
         humidity: json["humidity"],
-        dewPoint: json["dew_point"]?.toDouble(),
+        dewPonum: json["dew_ponum"]?.toDouble(),
         windSpeed: json["wind_speed"]?.toDouble(),
         windDeg: json["wind_deg"],
         windGust: json["wind_gust"]?.toDouble(),
@@ -268,7 +270,7 @@ class Daily {
         "feels_like": feelsLike?.toJson(),
         "pressure": pressure,
         "humidity": humidity,
-        "dew_point": dewPoint,
+        "dew_ponum": dewPonum,
         "wind_speed": windSpeed,
         "wind_deg": windDeg,
         "wind_gust": windGust,

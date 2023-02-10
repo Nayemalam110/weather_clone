@@ -40,11 +40,11 @@ class _HomeState extends State<Home> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: Text("Banani model town",
-                        style: TextStyle(
-                          color: Colors.white,
-                          //fontSize: 10.0,
-                        ) //TextStyle
+                    child: Obx(() => Text(weatherController.areaName.value,
+                            style: TextStyle(
+                              color: Colors.white,
+                              //fontSize: 10.0,
+                            )) //TextStyle
                         ),
                   ),
                 ],
