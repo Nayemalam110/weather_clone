@@ -6,6 +6,7 @@ import 'package:weather/service/service.dart';
 import 'package:weather/widget/temp_by_hour.dart';
 import 'package:weather/widget/weather_by_day.dart';
 import 'package:weather/widget/weather_detalis.dart';
+import 'package:intl/intl.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -22,6 +23,28 @@ class _HomeState extends State<Home> {
     weatherController.featchWeatherData();
     // TODO: implement initState
     super.initState();
+  }
+
+  String getCurrentData() {
+    if (weatherController.weathedata.value.current != null) {
+      var date = DateTime.fromMillisecondsSinceEpoch(
+          (weatherController.weathedata.value.current!.dt! as int) * 1000);
+
+      var maxTemp = weatherController.weathedata.value.daily![0].temp!.max!
+          .toStringAsFixed(0);
+
+      var minTemp = weatherController.weathedata.value.daily![0].temp!.min!
+          .toStringAsFixed(0);
+      // var max = DateTime.fromMillisecondsSinceEpoch(
+      //     (weatherController.weathedata.value.current!.sunrise as int) * 1000);
+      // var min = DateTime.fromMillisecondsSinceEpoch(
+      //     weatherController.weathedata.value.current!.sunset as int);
+      var dayMaxMin = "${DateFormat('E').format(date)} $maxTemp/$minTemp";
+
+      return dayMaxMin;
+    } else {
+      return '';
+    }
   }
 
   @override
@@ -78,21 +101,37 @@ class _HomeState extends State<Home> {
           delegate: SliverChildBuilderDelegate(
             (context, index) => Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      Text('22°C'),
-                      Text('Haze'),
-                    ],
-                  ),
-                  Text('sat27/16'),
-                  TempByHour(),
-                  WeatherByDay(),
-                  SizedBox(width: double.infinity, child: WeatherDetalis())
-                ],
+              child: Obx(
+                () => weatherController.weathedata.value.lat == null
+                    ? SizedBox()
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              Text(weatherController
+                                          .weathedata.value.current!.temp ==
+                                      null
+                                  ? ''
+                                  : weatherController
+                                      .weathedata.value.current!.temp!
+                                      .toStringAsFixed(0)),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(weatherController.weathedata.value.current!
+                                      .weather![0].main ??
+                                  ''),
+                            ],
+                          ),
+                          Text(getCurrentData()),
+                          TempByHour(),
+                          WeatherByDay(),
+                          SizedBox(
+                              width: double.infinity, child: WeatherDetalis())
+                        ],
+                      ),
               ),
             ), //ListTile
             childCount: 1,
