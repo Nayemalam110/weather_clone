@@ -72,10 +72,8 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ), //Text
-              background: Image.network(
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/A_black_image.jpg/640px-A_black_image.jpg",
-                fit: BoxFit.cover,
-              ) //Images.network
+              background: Image.asset(
+                  'assets/images/black_background.png') //Images.network
               ), //FlexibleSpaceBar
           expandedHeight: 200,
           backgroundColor: Colors.black,
