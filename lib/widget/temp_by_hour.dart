@@ -39,7 +39,9 @@ class TempByHour extends StatelessWidget {
                   ? Text('Now')
                   : Text(getTime(
                       weatherController.weathedata.value.hourly![index].dt)),
-              Icon(Icons.add),
+              Image.asset(
+                  height: 30,
+                  'assets/icons/${weatherController.weathedata.value.hourly![index].weather![0].icon}.png'),
               Text(weatherController.weathedata.value.hourly![index].temp!
                   .toStringAsFixed(0)),
             ],
