@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/api/api_key.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +29,21 @@ class WeatherController extends GetxController {
 
       //print(user);
     } else {
+      Get.defaultDialog(
+          title: 'Erro',
+          content: const Center(
+            child: Text('There is an error'),
+          ),
+          cancel: InkWell(
+              onTap: () => exit(0),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text('Close'),
+              )),
+          onCancel: () {
+            Get.back();
+          });
+
       print('Request failed with status code: ${response.statusCode}');
     }
   }
