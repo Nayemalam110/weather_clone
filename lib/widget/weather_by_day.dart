@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weather/service/service.dart';
@@ -38,7 +37,7 @@ class WeatherByDay extends StatelessWidget {
                 Expanded(
                     flex: 3,
                     child: index == 0
-                        ? Text('Today ')
+                        ? const Text('Today ')
                         : Text(getDay(weatherController
                             .weathedata.value.daily![index].dt))),
                 SizedBox(
@@ -50,7 +49,7 @@ class WeatherByDay extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Icon(Icons.wallet),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       SizedBox(
@@ -58,7 +57,7 @@ class WeatherByDay extends StatelessWidget {
                           child: weatherController.weathedata.value
                                       .daily![index].weather![0].main ==
                                   'Clear'
-                              ? Text('Sunny')
+                              ? const Text('Sunny')
                               : Text(
                                   '${weatherController.weathedata.value.daily![index].weather![0].main}')),
                       Text(

@@ -8,14 +8,14 @@ import 'package:weather/widget/weather_by_day.dart';
 import 'package:weather/widget/weather_detalis.dart';
 import 'package:intl/intl.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class AltHome extends StatefulWidget {
+  const AltHome({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<AltHome> createState() => _AltHomeState();
 }
 
-class _HomeState extends State<Home> {
+class _AltHomeState extends State<AltHome> {
   WeatherController weatherController =
       Get.put(WeatherController(), permanent: true);
   @override

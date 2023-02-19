@@ -6,9 +6,11 @@ import 'package:weather/api/api_key.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather/model/weatherModel.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:weather/model/weather_model_alt.dart';
 
 class WeatherController extends GetxController {
   Rx<WeatherModel> weathedata = WeatherModel().obs;
+  Rx<WeatherModelAlt> weathedataAlt = WeatherModelAlt().obs;
   var areaName = ''.obs;
 
   feachLocationName(lat, lang) async {
@@ -29,20 +31,7 @@ class WeatherController extends GetxController {
 
       //print(user);
     } else {
-      Get.defaultDialog(
-          title: 'Erro',
-          content: const Center(
-            child: Text('There is an error'),
-          ),
-          cancel: InkWell(
-              onTap: () => exit(0),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Close'),
-              )),
-          onCancel: () {
-            Get.back();
-          });
+      altFetchWeatherData(lat: lat, lang: lang);
 
       print('Request failed with status code: ${response.statusCode}');
     }
@@ -55,9 +44,7 @@ class WeatherController extends GetxController {
 
     if (response.statusCode == 200 || response.statusCode == 201) {
       // final user = json.decode(response.body);
-      weathedata.value = WeatherModelFromJson(response.body);
-      feachLocationName(lat, lang);
-      print(weathedata.value.lat);
+      weathedataAlt.value = weatherModelAltFromJson(response.body);
 
       //print(user);
     } else {
@@ -68,9 +55,9 @@ class WeatherController extends GetxController {
           ),
           cancel: InkWell(
               onTap: () => exit(0),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: const Text('Close'),
+              child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('Close'),
               )),
           onCancel: () {
             Get.back();

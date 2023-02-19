@@ -29,10 +29,10 @@ class WeatherModelAlt {
   double? latitude;
   double? longitude;
   double? generationtimeMs;
-  int? utcOffsetSeconds;
+  num? utcOffsetSeconds;
   String? timezone;
   String? timezoneAbbreviation;
-  int? elevation;
+  num? elevation;
   CurrentWeather? currentWeather;
   HourlyUnits? hourlyUnits;
   Hourly? hourly;
@@ -88,8 +88,8 @@ class CurrentWeather {
 
   double? temperature;
   double? windspeed;
-  int? winddirection;
-  int? weathercode;
+  num? winddirection;
+  num? weathercode;
   String? time;
 
   factory CurrentWeather.fromJson(Map<String, dynamic> json) => CurrentWeather(
@@ -218,7 +218,7 @@ class Hourly {
   List<String>? time;
   List<double>? temperature2M;
   List<double>? surfacePressure;
-  List<int>? visibility;
+  List<num>? visibility;
 
   factory Hourly.fromJson(Map<String, dynamic> json) => Hourly(
         time: json["time"] == null
@@ -234,7 +234,7 @@ class Hourly {
                 json["surface_pressure"]!.map((x) => x?.toDouble())),
         visibility: json["visibility"] == null
             ? []
-            : List<int>.from(json["visibility"]!.map((x) => x)),
+            : List<num>.from(json["visibility"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
