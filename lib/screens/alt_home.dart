@@ -16,11 +16,9 @@ class AltHome extends StatefulWidget {
 }
 
 class _AltHomeState extends State<AltHome> {
-  WeatherController weatherController =
-      Get.put(WeatherController(), permanent: true);
+  WeatherController weatherController = Get.find();
   @override
   void initState() {
-    weatherController.featchWeatherData();
     // TODO: implement initState
     super.initState();
   }
@@ -83,11 +81,6 @@ class _AltHomeState extends State<AltHome> {
           //   onPressed: () {},
           // ), //IconButton
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.comment),
-              tooltip: 'Comment Icon',
-              onPressed: () {},
-            ), //IconButton
             IconButton(
               icon: Icon(Icons.settings),
               tooltip: 'Setting Icon',

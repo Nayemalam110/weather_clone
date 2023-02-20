@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:weather/model/weatherModel.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:weather/model/weather_model_alt.dart';
+import 'package:weather/screens/alt_home.dart';
 
 class WeatherController extends GetxController {
   Rx<WeatherModel> weathedata = WeatherModel().obs;
@@ -39,31 +40,37 @@ class WeatherController extends GetxController {
 
 //altNet api
   Future<void> altFetchWeatherData({lat = 23.811056, lang = 90.407608}) async {
-    final response = await http.get(Uri.parse(altApiURL(lat, lang)),
-        headers: {'Accept': 'application/json'});
+    try {
+      final response = await http.get(Uri.parse(altApiURL(lat, lang)),
+          headers: {'Accept': 'application/json'});
 
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      // final user = json.decode(response.body);
-      weathedataAlt.value = weatherModelAltFromJson(response.body);
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // final user = json.decode(response.body);
+        weathedataAlt.value = weatherModelAltFromJson(response.body);
 
-      //print(user);
-    } else {
-      Get.defaultDialog(
-          title: 'Erro',
-          content: const Center(
-            child: Text('There is an error'),
-          ),
-          cancel: InkWell(
-              onTap: () => exit(0),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Close'),
-              )),
-          onCancel: () {
-            Get.back();
-          });
+        //print(user);
+      } else {
+        Get.defaultDialog(
+            title: 'Erro',
+            content: const Center(
+              child: Text('There is an error'),
+            ),
+            cancel: InkWell(
+                onTap: () => exit(0),
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Close'),
+                )),
+            onCancel: () {
+              Get.back();
+            });
 
-      print('Request failed with status code: ${response.statusCode}');
+        print('Request failed with status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print(e);
+    } finally {
+      Get.off(() => AltHome());
     }
   }
 
