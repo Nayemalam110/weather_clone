@@ -89,4 +89,27 @@ class WeatherController extends GetxController {
 
     return url;
   }
+
+  
+  Future<void> fetchDataAltDay(lat, long) async {
+    final url = Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&APPID=010d8469f57ac9801d2f0a9d72e648fc');
+
+    try {
+      final response = await http.get(url);
+      if (response.statusCode != 200) {
+        throw Exception();
+      }
+
+      final extertData = json.decode(response.body);
+
+      var extertDatas = extertData['main'];
+    } catch (e) {
+      print('There is an error');
+      print(e);
+      throw e;
+    } finally {
+      _isLoading.value = false;
+    }
+  }
 }
