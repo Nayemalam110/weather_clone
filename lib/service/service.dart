@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather/api/api_key.dart';
@@ -8,11 +8,54 @@ import 'package:weather/model/weatherModel.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:weather/model/weather_model_alt.dart';
 import 'package:weather/screens/alt_home.dart';
+import 'package:geolocator/geolocator.dart';
 
 class WeatherController extends GetxController {
   Rx<WeatherModel> weathedata = WeatherModel().obs;
   Rx<WeatherModelAlt> weathedataAlt = WeatherModelAlt().obs;
   var areaName = ''.obs;
+
+  @override
+  void onInit() {
+    getLocation();
+
+    // TODO: implement onInit
+    super.onInit();
+  }
+
+  Future<void> getLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location permissions are denied sorry');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      // Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high)
+        .then((value) {
+      feachLocationName(value.latitude, value.longitude);
+    });
+  }
 
   feachLocationName(lat, lang) async {
     List<Placemark> placemarks = await placemarkFromCoordinates(lat, lang);
@@ -90,7 +133,6 @@ class WeatherController extends GetxController {
     return url;
   }
 
-  
   Future<void> fetchDataAltDay(lat, long) async {
     final url = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&APPID=010d8469f57ac9801d2f0a9d72e648fc');
@@ -109,7 +151,7 @@ class WeatherController extends GetxController {
       print(e);
       throw e;
     } finally {
-      _isLoading.value = false;
+      // _isLoading.value = false;
     }
   }
 }
