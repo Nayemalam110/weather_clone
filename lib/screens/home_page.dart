@@ -8,18 +8,18 @@ import 'package:weather/widget/weather_by_day.dart';
 import 'package:weather/widget/weather_detalis.dart';
 import 'package:intl/intl.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
-  WeatherController weatherController = Get.find();
+class _HomePageState extends State<HomePage> {
+  WeatherController weatherController =
+      Get.put(WeatherController(), permanent: true);
   @override
   void initState() {
-    weatherController.featchWeatherData();
     // TODO: implement initState
     super.initState();
   }
@@ -34,10 +34,7 @@ class _HomeState extends State<Home> {
 
       var minTemp = weatherController.weathedata.value.daily![0].temp!.min!
           .toStringAsFixed(0);
-      // var max = DateTime.fromMillisecondsSinceEpoch(
-      //     (weatherController.weathedata.value.current!.sunrise as int) * 1000);
-      // var min = DateTime.fromMillisecondsSinceEpoch(
-      //     weatherController.weathedata.value.current!.sunset as int);
+
       var dayMaxMin = "${DateFormat('E').format(date)} $maxTemp/$minTemp";
 
       return dayMaxMin;
@@ -82,11 +79,6 @@ class _HomeState extends State<Home> {
           //   onPressed: () {},
           // ), //IconButton
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.comment),
-              tooltip: 'Comment Icon',
-              onPressed: () {},
-            ), //IconButton
             IconButton(
               icon: Icon(Icons.settings),
               tooltip: 'Setting Icon',
